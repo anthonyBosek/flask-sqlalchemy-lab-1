@@ -5,7 +5,6 @@ from app import app
 from models import db, Earthquake
 
 with app.app_context():
-
     # Delete all rows in the "earthquakes" table
     Earthquake.query.delete()
 
