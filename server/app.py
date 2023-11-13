@@ -35,5 +35,16 @@ def earthquake_by_id(id):
     return make_response(body, status)
 
 
+@app.route("/earthquakes/magnitude/<float:magnitude>")
+def earthquake_by_magnitude(magnitude):
+    earthquakes = []
+
+    for earthquake in Earthquake.query.filter(Earthquake.magnitude >= magnitude).all():
+        earthquakes.append(earthquake.to_dict())
+
+    body = {"count": len(earthquakes), "quakes": earthquakes}
+    return make_response(body, 200)
+
+
 if __name__ == "__main__":
     app.run(port=5555, debug=True)
